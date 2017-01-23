@@ -1,0 +1,24 @@
+#Student Name: Greg Murray
+#SID: 1101589
+#Class: CS12M
+#Date: 7/6/2015
+#File Description: A Makefile that updates 
+#the file FileReverse.class, and has clean
+#and submit functionality.
+#File Name: Makefile.txt
+
+
+JAVASRC = FileReverse.java
+SOURCES = README Makefile $(JAVASRC)
+MAINCLASS = FileReverse
+CLASSES = FileReverse.class
+SUBMIT = submit cmps012b-pt.u15 lab2
+
+$(CLASSES): $(JAVASRC)
+	javac -Xlint $(JAVASRC)
+
+clean:
+	rm $(CLASSES) 
+
+submit: $(SOURCES)
+	$(SUBMIT) $(SOURCES)

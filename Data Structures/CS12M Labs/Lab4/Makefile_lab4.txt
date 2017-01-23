@@ -1,0 +1,28 @@
+#Student Name: Greg Murray
+#SID: 1101589
+#Class: CS12M
+#Date: 7/120/2015
+#File Description: A Makefile that updates 
+#the files in the dependent lines and has clean
+#and submit utilities.
+#File Name: Makefile.txt
+
+FLAGS = -std=c99 -Wall
+SOURCES = charType.c
+OBJECTS = charType.o
+EXEBIN = charType
+CHECK = valgrind --leak-check=full 
+
+all: $(EXEBIN)
+
+$(EXEBIN) : $(OBJECTS)
+	gcc -o $(EXEBIN) $(OBJECTS)
+
+$(OBJECTS) : $(SOURCES)
+	gcc -c $(FLAGS) $(SOURCES)
+
+check :
+	$(CHECK) $(EXEBIN) $(SOURCES) outfile
+
+clean :
+	rm $(EXEBIN) $(OBJECTS)

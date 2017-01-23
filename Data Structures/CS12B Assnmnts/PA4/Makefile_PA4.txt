@@ -1,0 +1,31 @@
+# Student Name: Greg Murray
+# SID: 1101589
+# Class: CS12B
+# Date: 8/2/2015
+# File Description: A Makefile file that updates the files 
+# listed in the dependency lines below. Also includes clean
+# and submit utilities.
+# File Name: Makefile
+
+JAVAC      = javac 
+MAINCLASS  = Simulation
+JAVASRC    = $(wildcard *.java)
+SOURCES    = $(JAVASRC) makefile README
+CLASSES    = $(patsubst %.java, %.class, $(JAVASRC))
+JARCLASSES = $(patsubst %.class, %*.class, $(CLASSES))
+JARFILE    = $(MAINCLASS) 
+
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES)
+	echo Main-class: $(MAINCLASS) > Manifest
+	jar cvfm $(JARFILE) Manifest $(JARCLASSES)
+	chmod +x $(JARFILE)
+	rm Manifest
+
+%.class: %.java
+	$(JAVAC) $<
+
+clean:
+	rm *.class $(JARFILE)

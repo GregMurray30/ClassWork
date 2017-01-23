@@ -1,0 +1,33 @@
+# Student Name: Greg Murray
+# SID: 1101589
+# Class: CS12B
+# Date: 7/8/2015
+# File Description: A Makefile file that updates the files 
+# listed in the dependency lines below. Also includes clean
+# and submit utilities.
+# File Name: Makefile
+
+
+JAVASRC = Search.java
+SOURCES = README Makefile $(JAVASRC)
+MAINCLASS = Search
+CLASSES = Search.class Target.class
+JARFILE = Search
+SUBMIT = submit cmps012b-pt.u15 pa2
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES)
+	echo Main-class: $(MAINCLASS) > Manifest
+	jar cvfm $(JARFILE) Manifest $(CLASSES)
+	rm Manifest
+	chmod +x $(JARFILE)
+
+$(CLASSES): $(JAVASRC)
+	javac -Xlint $(JAVASRC)
+
+clean:
+	rm $(CLASSES) $(JARFILE)
+
+submit: $(SOURCES)
+	$(SUBMIT) $(SOURCES)

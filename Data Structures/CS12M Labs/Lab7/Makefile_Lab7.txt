@@ -1,0 +1,31 @@
+# Student Name: Greg Murray
+# SID: 1101589
+# Class: CS12M
+# Date: 8/7/2015
+# File Description: A Makefile file that updates the files 
+# listed in the dependency lines below. Also includes clean
+# and submit utilities.
+# File Name: Makefile
+
+# Variables
+SOURCES    = Dictionary.java DictionaryInterface.java DictionaryClient.java\
+             KeyNotFoundException.java DuplicateKeyException.java
+MAINCLASS  = DictionaryClient
+CLASSES    = Dictionary.class DictionaryInterface.class DictionaryClient.class Dictionary\$$Node.class\
+             KeyNotFoundException.class DuplicateKeyException.class
+JARFILE    = DictionaryClient
+
+# Build Targets
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES)
+	echo Main-class: $(MAINCLASS) > Manifest
+	jar cvfm $(JARFILE) Manifest $(CLASSES)
+	rm Manifest
+	chmod +x $(JARFILE)
+
+$(CLASSES): $(SOURCES)
+	javac -Xlint:all,-serial $(SOURCES)  
+
+clean:
+	rm -f $(CLASSES) $(JARFILE) 

@@ -1,0 +1,32 @@
+# Student Name: Greg Murray
+# SID: 1101589
+# Class: CS12B
+# Date: 7/1/2015
+# File Desciption: This file is a Makefile with macros that automates
+# any necessary updates to files Exrema.java, Exrema.class, or Extrema         # according to the dependency lines.
+# File Name: Makefile
+
+JAVASRC = Extrema.java
+SOURCES = README Makefile $(JAVASRC)
+MAINCLASS = Extrema
+CLASSES = Extrema.class
+JARFILE = Extrema
+SUBMIT = submit cmps012b-pt.u15 pa1
+
+all: $(JARFILE)
+
+$(JARFILE): $(CLASSES)
+	echo Main-class: $(MAINCLASS) > Manifest
+	jar cvfm $(JARFILE) Manifest $(CLASSES)
+
+	rm Manifest
+	chmod +x $(JARFILE)
+
+$(CLASSES): $(JAVASRC)
+	javac -Xlint $(JAVASRC)
+
+clean:
+	rm $(CLASSES) $(JARFILE)
+
+submit: $(SOURCES)
+	$(SUBMIT) $(SOURCES)
